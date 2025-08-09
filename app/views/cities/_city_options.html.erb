@@ -1,0 +1,4 @@
+<option value="">Select a city</option>
+<% cities.each do |city| %>
+  <option value="<%= city.id %>"><%= city.city_name %></option>
+<% end %>

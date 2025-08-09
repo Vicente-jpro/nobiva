@@ -1,0 +1,59 @@
+<div class="container">
+
+  <p class="fs-4 text-center">Perfil</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Email</th>
+        <th scope="col">Perfil</th>
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <div id="profiles">
+        <% @profiles.each do |profile| %>
+            <tr>
+              <th scope="row"><%= profile.id %></th>
+              <td><%= profile.name_profile %></td>
+              <td><%= profile.user.email %></td>
+
+              <% if profile.profile_type == "super_adminstrador" %>
+              
+                <td>
+                  <span class="badge text-bg-primary fs-6">
+                  <%= profile.profile_type %>
+                  </span>
+                </td>
+              
+              <% elsif profile.profile_type == "empresa" %>
+    
+                <td>
+                  <span class="badge text-bg-secondary fs-6">
+                    <%= profile.profile_type %>
+                  </span>
+                </td>
+    
+              <% else %>
+
+                <td>
+                  <span class="badge text-bg-success fs-6">
+                    <%= profile.profile_type %>
+                  </span>
+                </td>
+              
+              <% end %>
+              
+              <td>
+                <%= link_to t("links.edit"), edit_profile_path(profile), class: "btn btn-info" %> 
+              </td>
+            </tr>
+        <% end %>
+      </div>
+
+    </tbody>
+  </table>
+
+</div>

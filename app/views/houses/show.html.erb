@@ -1,0 +1,189 @@
+  <div class="album py-5" id="lands">
+    <div class="container-fluid">
+      <div class="d-flex justify-content-end">
+        
+        <%= link_to house_show_images_path(@house), 
+        class:"btn btn-pink ms-1" do %>
+          <i class="bi bi-camera-fill"></i>
+
+            <%= t("pages.houses.links.see-all-more-photos")%>
+            
+        <% end %>
+
+        <%= render "favorite_houses/form", 
+        favorite_house: favorite_house_built(@house) %>
+    
+       </div>
+        <div class="row my-1">
+            <% if @house.house_images.attached? %>
+              <div class="col-sm-6">
+                  <%= image_tag(@house.house_images.first, 
+                  class: "bd-placeholder-img card-img-top", width:"100%", height:"390")%>
+              </div>
+              <div class="col">
+                <div class="row">
+                    <%= render "images_show", images: @house.house_images %>
+                </div>
+              </div>
+            <% end %>
+        </div>
+
+    </div>
+  </div>
+
+  <div class="container">
+    <% if user_signed_in? %>
+      <div class="d-grid gap-2">
+        <%= link_to t("links.edit") , edit_house_path(@house), class:"btn btn-info" %> 
+        <%= button_to t('links.destroy'), @house, method: :delete, 
+        class:"btn btn-danger  my-1 col-sm-12" %>
+        <% if current_user.profile.super_adminstrador? %>
+          <%= button_to "#{ @house.pending ? "Aprovar": "Reprovar" }", 
+          pending_status_house_path(@house), class: "btn btn-warning my-1 col-sm-12" %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <br>
+    <p>
+      <strong class="fs-4 text-pink">
+        <%= @house.address.street %>, 
+        <%= @house.address.city.city_name %>,  
+        <%= @house.address.city.province.province_name %>
+        <i class="bi bi-geo-alt-fill fs-4"></i>
+      </strong>
+    </p>
+    
+    <h1 class="fs-3 text-primary-emphasis">
+        <%= @house.title %>, <%= @house.tipology %>
+    </h1>
+    <p class="fs-3 text-pink">
+       <%=  House.human_attribute_name(:price) %> <%= @house.price %> Kz  <span class="fs-5">/mês</span>
+    </p>
+   
+    
+   <div class="fs-3">
+
+    <div class="d-inline text-primary-emphasis">
+      <%= Dimention.human_attribute_name(:width_d) %>: <%= @house.dimention.height_d %> m², 
+      <%= Dimention.human_attribute_name(:height_d)%>: <%= @house.dimention.width_d %> m²
+    </div>
+   
+   </div>
+
+    <div class="row">
+      <div class="col-sm-8">
+        
+        <hr class="text-pink"> <br>
+        <strong class="text-pink"><%= House.human_attribute_name(:description) %></strong>
+        <p class="text-primary-emphasis">
+          <%= @house.description %>
+        </p>
+
+        <br>
+        <hr class="text-pink">
+          <p>
+           <strong class="text-pink"> <%= t('compartiment')%> <%= @house.tipology %> </strong>
+         </p>
+         <div class="row">
+            <div class="col">
+              <p class="text-primary-emphasis">
+                
+                <i class="bi bi-check2-circle text-pink"></i> 
+                 <%= @house.living_room %> <%= House.human_attribute_name(:living_room) %>  <br>
+
+                 <i class="bi bi-check2-circle text-pink"></i>
+                 <%= @house.bath_room %> <%= House.human_attribute_name(:bath_room) %>  <br>
+
+                  <i class="bi bi-check2-circle text-pink"></i> 
+                 <%= @house.room %> <%= House.human_attribute_name(:room) %> <br>
+              </p>
+            </div>
+            <div class="col">
+              <p class="text-primary-emphasis">
+                <i class="bi bi-check2-circle text-pink"></i> 
+                 <%= @house.kitchen %> <%= House.human_attribute_name(:kitchen) %>  <br>
+
+                 <i class="bi bi-check2-circle text-pink"></i>
+                 <%= @house.balcony %> <%= House.human_attribute_name(:balcony) %>  <br>
+
+                  <i class="bi bi-check2-circle text-pink"></i> 
+                 <%= @house.garage %> <%= House.human_attribute_name(:garage) %> <br>
+              </p>
+            </div>
+            <div class="col">
+              <p class="text-primary-emphasis">
+                 <i class="bi bi-check2-circle text-pink"></i>
+                 <%= @house.pool %> <%= House.human_attribute_name(:pool) %>  <br>
+
+                 <i class="bi bi-check2-circle text-pink"></i>
+                 <%= House.human_attribute_name(:furnished) %>: <%= @house.furnished %>  <br>
+
+                  <i class="bi bi-check2-circle text-pink"></i> 
+                 <%= @house.garage %> <%=  :garage %> <br>
+
+
+                  <i class="bi bi-check2-circle text-pink"></i> 
+                 <%= @house.yard %> <%= House.human_attribute_name(:yard) %> <br>
+                 
+              </p>
+            </div>
+          </div>
+
+       <hr class="text-pink">
+               <div class="row">
+            <div class="col">
+              <p>
+                <strong class="text-pink"> <%= House.human_attribute_name(:type_negotiation) %> </strong>
+              </p>
+              <p class="text-primary-emphasis">
+                <i class="bi bi-check2-circle text-pink"></i>
+                <%= @house.type_negotiation %>  <br>
+              </p>
+            </div>
+            <div class="col">
+             <p>
+                <strong class="text-pink"> <%= House.human_attribute_name(:next_by) %> </strong>
+              </p>
+              <p class="text-primary-emphasis">
+                  <i class="bi bi-check2-circle text-pink"></i> 
+                 <%= @house.next_by %> <br>
+              </p>
+            </div>
+            <div class="col">
+              <p>
+                <strong class="text-pink"> <%= House.human_attribute_name(:property_type) %> </strong>
+              </p>
+              <p class="text-primary-emphasis">
+                  <i class="bi bi-check2-circle text-pink"></i> 
+                 <%= @house.property_type %> <br>
+              </p>
+            </div>
+            <div class="col">
+              <p>
+                <strong class="text-pink"> <%= House.human_attribute_name(:condition)%> </strong>
+              </p>
+              <p class="text-primary-emphasis">
+                  <i class="bi bi-check2-circle text-pink"></i> 
+                 <%= @house.condition %> <br>
+              </p>
+            </div>
+          </div>
+ 
+
+        <hr class="text-pink">
+
+      <!-- houses -->
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-3" id="houses">
+      <!-- render all house related to specific profile-->
+        <% @houses.each do |house| %>
+          <%= render house %>
+        <% end %>
+      </div>
+      <!-- End lands -->
+
+      </div>
+    <%= render "houses/publisher" %>
+
+    </div>
+  </div>

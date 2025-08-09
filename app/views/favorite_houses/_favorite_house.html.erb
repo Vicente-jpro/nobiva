@@ -1,0 +1,36 @@
+  <%= link_to favorite_house.house, class: "link-offset-2 link-underline link-underline-opacity-0" do %>
+      
+    <div class="col" id="<%= dom_id favorite_house %>">
+      <div class="card border-light shadow-sm mb-5 bg-body-tertiary rounded">
+      
+
+          <% if favorite_house.house.house_images.attached? %>
+            <%= render "images_index", images: favorite_house.house.house_images %>
+          <% end %>
+      
+
+        <div class="card-body">
+          <p class="card-text">
+
+            <strong class="text-pink">
+              <%= favorite_house.house.title %>, 
+              <%= favorite_house.house.tipology %>
+              <%= favorite_house.house.address.city.province.province_name %>
+            </strong> <br>
+        
+           </p>
+
+            <p class="text-primary-emphasis">
+              <%=  favorite_house.house.description %>
+            </p>
+              <span class="bg-green px-3"> <%= favorite_house.house.type_negotiation %></span> <br>
+          
+              <strong class="text-pink"><%= favorite_house.house.price %> Kz</strong> 
+          
+            <%= button_to "remover from favorite", favorite_house,
+          method: :delete, class:"btn btn-pink my-1" %>
+
+        </div>
+      </div>
+    </div>
+  <% end %>

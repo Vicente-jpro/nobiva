@@ -1,0 +1,75 @@
+
+ <div class="container col-lg-6 my-4">
+    <div class="card shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+        <div class="card-body">
+      
+        <div class="row my-2 text-primary-emphasis">
+         <%= bootstrap_form_with(model: land) do |form| %>
+          <% if land.errors.any? %>
+            <div style="color: red">
+              <h2><%= pluralize(land.errors.count, "error") %>
+                  <%= t("pages.lands.title.actions.prohibited")%>
+              </h2>
+
+              <ul>
+                <% land.errors.each do |error| %>
+                  <li><%= error.full_message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+            <div>
+              <%= form.text_field :title_land, label: Land.human_attribute_name(:title_land),
+              class: 'text-light-emphasis' %>
+              <%= form.file_field :images, multiple: true, class: 'text-light-emphasis' %>  
+         
+              <%= form.collection_select :province_id, Province.order(:province_name), :id, :province_name, 
+              { label: Province.model_name.human(count: 1), prompt: "Select a province" }, 
+              { class: "province_select text-light-emphasis", onchange: "updateCities(this.value)" } %> 
+                
+              <%= form.fields_for :address do |address_form| %>
+                <%= address_form.collection_select :city_id, [], :id, :city_name, 
+                    { label: City.model_name.human(count: 1) },  
+                    { class: "city_select text-light-emphasis" } %>
+                <%= address_form.text_field :street, label: Address.human_attribute_name(:street),
+                class:'text-light-emphasis' %>
+              <% end %> 
+
+              <%= render 'shered/dependent_select' %>
+
+              <div class="row">
+                <p class="text-center text-primary-emphasis"> <%= Dimention.model_name.human(count: 1)  %> </p>
+                <%= form.fields_for :dimention do |dimention_form| %>
+                  <div class="col">
+                    <%= dimention_form.number_field :width_d, 
+                    label: Dimention.human_attribute_name(:width_d), class: 'text-light-emphasis' %>
+                  </div>
+                  <div class="col">
+                    <%= dimention_form.number_field :height_d, 
+                    label: Dimention.human_attribute_name(:height_d), class: 'text-light-emphasis' %>
+                  </div>
+                <% end %> 
+              </div>
+
+
+              <%= form.number_field :price, label: Land.human_attribute_name(:price), 
+              class: 'text-light-emphasis'%>
+              <%= form.text_area :description, label: Land.human_attribute_name(:description), 
+              size: "70x5", class: 'text-light-emphasis' %>
+        
+            </div>
+
+            <div class="mb-3 d-grid gap-2">
+              <%= form.submit class: "btn btn-info" %>
+            </div>
+          <% end %>
+
+        </div>
+    </div>
+  </div>
+
+
+
+
+ 

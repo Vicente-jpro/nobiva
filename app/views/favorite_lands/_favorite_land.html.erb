@@ -1,0 +1,31 @@
+<%= link_to favorite_land.land, class: "link-offset-2 link-underline link-underline-opacity-0" do %>
+    
+  <div class="col" id="<%= dom_id favorite_land%>">
+    <div class="card border-light shadow-sm mb-5 bg-body-tertiary rounded">
+    
+      <% if favorite_land.land.images.attached? %>
+        <%= render "images_index", images: favorite_land.land.images %>
+      <% end %>
+
+      <div class="card-body">
+          <p class="card-text">
+              <strong class="text-pink"><%= favorite_land.land.title_land %></strong> <br>
+          </p>
+            <p class="text-primary-emphasis">
+              <%= truncate_html(favorite_land.land.description) %>
+            </p>
+        
+            <div class="row">
+              <div class="col">
+                <strong class="text-pink fs-5"><%= favorite_land.land.price %> Kz</strong>
+              </div>
+            </div>
+            
+            <%= button_to "remover from favorite", favorite_land,
+            method: :delete, class:"btn btn-pink my-1" %>  
+        </div>
+
+
+    </div>
+  </div>
+<% end %>

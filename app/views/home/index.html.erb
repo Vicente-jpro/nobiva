@@ -1,0 +1,35 @@
+<!-- Home image -->
+  <section>
+    <div class="container">
+    
+        <div class="row">
+            <div class="col mt-5">
+                <h1 class="fs-2 fw-bold text-pink mt-5">
+                
+                    <%= t("pages.home.company.title") %>
+                
+                </h1>
+                <p class="col-md-8 fs-5 text-primary-emphasis">
+                
+                 <%= t("pages.home.company.description") %>
+                
+                </p>
+                <a href="#contactos">
+                    <button class="btn btn-pink btn-lg" type="button" id="#contactos">
+
+                    <%= t("pages.home.company.contact-us") %>
+                        
+                    </button>
+                </a>
+            </div>
+
+            <div class="col">
+                <%= image_tag("home.png", alt: "adicionatec") %>
+            </div>
+        </div> 
+        <!--Contact info-->
+        <%= render "home/contact_info" %>
+        <!--End contact info--> 
+    </div>
+  </section>
+   <!-- And of Home image -->

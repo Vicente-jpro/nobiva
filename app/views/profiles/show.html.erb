@@ -1,0 +1,7 @@
+<% if @profile.profile_type == "super_adminstrador" %>
+    <div class="text-center">
+        <%= link_to "Todos os perfils", profiles_path, class: "btn btn-secondary"%>
+    </div>
+<% end %>
+
+<%= render @profile %>

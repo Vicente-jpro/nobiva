@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Olá <%= @user.name %></h1>
+    
+    <p>
+      Seu plano <%= @plan.name %> expirará em 15 dias.
+    </p>
+    
+    <p>
+      Para continuar usando nossos serviços, por favor, renove seu plano antes do vencimento.
+    </p>
+
+    <p>
+      Detalhes do seu plano:
+      <ul>
+        <li>Plano: <%= @plan.name %></li>
+        <li>Duração: <%= @plans_selected.duration %> dias</li>
+        <li>Dias utilizados: <%= @plans_selected.day_used %> dias</li>
+        <li>Dias restantes: <%= @days_remaining %> dias</li>
+      </ul>
+    </p>
+
+    <p>
+      Agradecemos a preferência!
+    </p>
+  </body>
+</html>

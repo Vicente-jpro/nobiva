@@ -1,0 +1,24 @@
+      <!-- reservation-->
+      <div class="col d-flex justify-content-center">
+        <div class="card fixed" style="width: 18rem; height: 620px ;">
+          <div class="card-body">
+            <h5 class="card-title text-pink text-center"><%= t("publisher")%></h5>
+            <p class="card-text text-center text-primary-emphasis">
+              <%= @profile.name_profile %>
+            </p>
+            <p class="card-text text-center text-primary-emphasis">
+              Breve introdução da empresa ou do proprietário
+              <br>
+              <%= @profile.phone1 %>, <%= @profile.phone1 %>, 
+              <%= @profile.user.email %>
+            </p>
+            <div class="text-primary-emphasis">
+        
+              <%= render "contacts/form", contact: Contact.new %>
+        
+            </div>
+          </div>
+        </div>
+      
+      </div>
+      <!-- End reservation-->

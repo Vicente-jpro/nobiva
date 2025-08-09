@@ -1,0 +1,29 @@
+ <div class="container col-lg-6 my-4">
+    <div class="card shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+        <div class="card-body">
+        <%= bootstrap_form_with(model: plan) do |form| %>
+          <% if plan.errors.any? %>
+            <div style="color: red">
+              <h5><%= pluralize(plan.errors.count, "error") %> prohibited this plan from being saved:</h5>
+
+              <ul>
+                <% plan.errors.each do |error| %>
+                  <li><%= error.full_message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <%= form.text_field :name_plans, class: 'text-light-emphasis' %>
+          <%= form.number_field :price, class: 'text-light-emphasis' %>
+          <%= form.text_area :description, size: "70x5", class: 'text-light-emphasis' %>
+    
+          <div class="mb-3 d-grid gap-2">
+            <%= form.submit class: "btn btn-info" %>
+          </div>
+
+          <%= link_to "Back to plans", plans_path %>
+        <% end %>
+    </div>
+  </div>
+</div>

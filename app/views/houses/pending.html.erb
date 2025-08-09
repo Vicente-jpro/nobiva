@@ -1,0 +1,41 @@
+<div class="album py-5">
+  <div class="container">
+    
+    <%= render 'houses/buttons_search' %>
+ 
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3" id="houses">
+    
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Titulo do Imóvel</th>
+            <th scope="col">Data Publicação</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @houses.each do |house| %>
+
+            <tr>
+              <th scope="row"><%= house.id %></th>
+              <td><%= link_to house.title, house_path(house), class: 'link link-primary' %></td>
+              <td><%= house.updated_at %></td>
+
+              <td><%= link_to 'Ver', house_path(house), class: 'btn btn-primary' %></td>
+            </tr>
+      
+          <% end %>
+        </tbody>
+      </table>
+
+    </div>
+
+
+    <div class="d-flex justify-content-center">
+      <%= paginate @houses %>
+    </div>
+
+    
+  </div>
+</div>

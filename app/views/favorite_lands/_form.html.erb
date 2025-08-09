@@ -1,0 +1,33 @@
+<%= form_with(model: favorite_land) do |form| %>
+  <% if favorite_land.errors.any? %>
+    <div style="color: red">
+      <h5><%= pluralize(favorite_land.errors.count, "error") %> prohibited this favorite_land from being saved:</h5>
+
+      <ul>
+        <% favorite_land.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <% if user_signed_in? %>
+      <%= form.hidden_field :profile_id, value: favorite_land.profile_id%>
+      <%= form.hidden_field :land_id, value: favorite_land.land_id %>
+    
+      <%= form.submit t("links.save-as-favorite"), class:"btn btn-pink ms-1" do %>
+        <i class="bi bi-heart-fill"></i>
+
+            <%= t("links.save-as-favorite")%>
+
+      <% end %>
+    <% else %>
+      <%= link_to user_session_path, class: "btn btn-pink ms-1" do %>
+        <i class="bi bi-heart-fill"></i>
+        
+        <%= t("links.save-as-favorite")%>
+
+      <% end %> 
+    <% end %>
+
+<% end %>
+

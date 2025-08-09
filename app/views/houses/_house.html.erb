@@ -1,0 +1,38 @@
+  <%= link_to house, class: "link-offset-2 link-underline link-underline-opacity-0" do %>
+      
+    <div class="col" id="<%= dom_id house %>">
+      <div class="card border-light shadow-sm mb-5 bg-body-tertiary rounded">
+      
+          <% if house.house_images.attached? %>
+            <%= render "images_index", images: house.house_images %>
+          <% end %>
+      
+
+        <div class="card-body">
+          <p class="card-text">
+
+            <strong class="text-pink">
+              <%= house.title %>, 
+              <%= house.tipology %>
+              <%= house.address.city.province.province_name %>
+            </strong> <br>
+          </p>
+
+            <p class="text-primary-emphasis">
+              <%= truncate_html(house.description) %>
+            </p>
+        
+            <div class="row">
+              <div class="col">
+                <strong class="text-pink fs-5"><%= house.price %> Kz</strong>
+              </div>
+              <div class="col">
+                <strong class="badge text-pink bg-green fs-6"> <%= house.type_negotiation %></strong> 
+              </div>
+            </div>
+
+
+        </div>
+      </div>
+    </div>
+  <% end %>

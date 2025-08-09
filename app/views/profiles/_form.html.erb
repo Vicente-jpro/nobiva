@@ -1,0 +1,67 @@
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+ <div class="container col-lg-6 my-4">
+    <div class="card shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+        <div class="card-body">
+        <div class="card-title">
+            <div class="d-flex justify-content-center">
+
+              <%= render "image", image_profile: profile.image %>
+              
+            </div>
+            <h4 class="text-center text-pink">Editar Perfil</h4>
+        </div>
+        <div class="row my-2">
+          <%= bootstrap_form_with(model: profile) do |form| %>
+            <% if profile.errors.any? %>
+              <div style="color: red">
+                <h5><%= pluralize(profile.errors.count, "error") %> prohibited this profile from being saved:</h5>
+
+                <ul>
+                  <% profile.errors.each do |error| %>
+                    <li><%= error.full_message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <div>
+              <%= form.text_field :name_profile, 
+              label: Profile.human_attribute_name(:name_profile), class: 'text-light-emphasis' %>
+              <%= form.file_field :image, label: Profile.human_attribute_name(:image),
+               class: 'text-light-emphasis'%>  
+              <%= form.select :gender, Profile.genders, {label: :gender}, class: 'text-light-emphasis'%>
+
+              <%= form.select :profile_type, Profile.profile_types, 
+                {label: Profile.human_attribute_name(:profile_type)}, class: 'text-light-emphasis' %>
+              <%= form.telephone_field :phone1, label: Profile.human_attribute_name(:phone1), 
+              class: 'text-light-emphasis' %>
+              <%= form.telephone_field :phone2, label: Profile.human_attribute_name(:phone2), 
+              class: 'text-light-emphasis' %>
+            
+              <%= form.collection_select :province_id, Province.order(:province_name), :id, :province_name, 
+              { label: Province.model_name.human(count: 1), prompt: "Select a province" }, 
+              { class: "province_select text-light-emphasis", onchange: "updateCities(this.value)" } %> 
+                
+              <%= form.fields_for :address do |address_form| %>
+                <%= address_form.collection_select :city_id, [], :id, :city_name, 
+                    { label: City.model_name.human(count: 1) },  
+                    { class: "city_select text-light-emphasis" } %>
+                <%= address_form.text_field :street, label: Address.human_attribute_name(:street), 
+                    class: "text-light-emphasis" %>
+              <% end %> 
+
+              
+              <%= render 'shared/dependent_select' %>
+      
+            </div>
+
+            <div class="mb-3 d-grid gap-2">
+              <%= form.submit class: "btn btn-info" %>
+            </div>
+          <% end %>
+
+        </div>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

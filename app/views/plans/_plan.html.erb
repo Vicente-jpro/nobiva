@@ -1,0 +1,56 @@
+
+  <div class="col" id="<%= dom_id plan %>">
+    <div class="card mb-4 rounded-3 shadow-sm">
+      <div class="card-header py-3">
+        <h4 class="my-0 fw-normal text-center"><%= plan.name_plans %></h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title text-center text-pink"><%= plan.price %><small class="text-muted fw-light">/mo</small></h1>
+        <ul class="list-unstyled mt-3 mb-4 text-primary-emphasis">
+          <li><%= plan.description %></li>
+          <br>
+         
+        </ul>
+        <div>
+
+          <%= bootstrap_form_with(model: @plans_selected) do |form| %>
+          <% if @plans_selected.errors.any? %>
+            <div style="color: red">
+              <h2><%= pluralize(@plans_selected.errors.count, "error") %> prohibited this plans_selected from being saved:</h2>
+
+              <ul>
+                <% @plans_selected.errors.each do |error| %>
+                  <li><%= error.full_message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <% if user_signed_in? %>
+            <% if current_user.profile.super_adminstrador? %>
+              <%= link_to "Show this plan", plan , class:"w-100 btn btn-lg btn-pink mb-2"%>
+            <% else %>
+              <%= form.select :duration, PlansSelected.durations.keys %>
+              <%= form.hidden_field :plan_id, value: plan.id %> 
+              
+              <div class="mb-3 d-grid gap-2">
+                <%= form.submit class:"btn btn-info" %>
+              </div>
+            <% end %>
+            
+           <% end %>
+
+         <% end %>
+
+        <% if !user_signed_in?%>
+          <%= link_to "Subscribe", new_plans_selected_path,  class:"w-100 btn btn-lg btn-pink mb-2"%>
+        <% end %>
+        </div>
+     
+      </div>
+    </div>
+  </div>
+
+
+  
+

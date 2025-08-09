@@ -1,0 +1,64 @@
+
+<main class="container col-lg-6 my-4">
+    <div class="card shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+        <div class="card-body">
+          <div class="card-title">
+              <h4 class="text-center text-pink">Edit <%= resource_name.to_s.humanize %></h4>
+          </div>
+            <%= bootstrap_form_for(resource, as: resource_name, 
+            url: registration_path(resource_name), data: { turbo: false }, html: { method: :put }) do |f| %>
+              <%= render "devise/shared/error_messages", resource: resource %>
+
+              <div class="field">
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", label: :email %>
+              </div>
+
+              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                <div> <%= t("devise.title.actions.currently-waiting-confirmation") %> 
+                <%= resource.unconfirmed_email %></div>
+              <% end %>
+
+              <div class="field">
+                <i>
+                  (<%= t("devise.title.actions.leave-blank-if-you-dont-want-to-change-it") %>)
+                </i><br />
+                <%= f.password_field :password, autocomplete: "new-password", label: :password %>
+                <% if @minimum_password_length %>
+                  <br />
+                  <em>
+                    <%= @minimum_password_length %> 
+                    <%= t("devise.title.actions.characters-minimum")%>
+                  </em>
+                <% end %>
+              </div>
+
+              <div class="field">
+                <%= f.password_field :password_confirmation, autocomplete: "new-password", label: :password_confirmation %>
+              </div>
+
+              <div class="field">
+                <i>
+                  (<%=t("devise.title.actions.we-need-your-current-password-to-confirm-your-changes")%>)
+                </i><br />
+                <%= f.password_field :current_password, autocomplete: "current-password", label: :current_password %>
+              </div>
+
+               <div class="d-grid gap-2 actions">
+                <%= f.submit t("links.update") , class: "btn btn-info" %>
+              </div>
+            <% end %>
+            <div class="d-grid gap-2 ">
+
+              <%= button_to t("devise.links.cancel-my-account"), registration_path(resource_name), 
+                data: { confirm: t("devise.title.actions.confirm"), 
+                      turbo_confirm: t("devise.title.actions.confirm") }, 
+                method: :delete, class:"btn btn-light"%>
+                
+            </div>
+
+            <%= link_to t("devise.links.back"), :back, class:"link-info" %>
+
+        </div>
+    </div>
+</main>
+
