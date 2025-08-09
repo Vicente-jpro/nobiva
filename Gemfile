@@ -40,15 +40,17 @@ gem "thruster", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-gem "devise", "~> 4.9", ">= 4.9.3"
-gem "devise-i18n", "~> 1.11", ">= 1.11.0"
+gem "devise", "~> 4.9", ">= 4.9.2"
+gem "devise-i18n", "~> 1.11"
+
+
 gem "bootstrap", "~> 5.3.0.alpha3"
 gem "bootstrap_form", "~> 5.2", ">= 5.2.3"
 gem "jquery-rails"
 gem "kaminari", "~> 1.2", ">= 1.2.2"
 gem "kaminari-bootstrap", "~> 3.0", ">= 3.0.1"
 gem "mini_magick", "~> 4.12"
-gem "rails-i18n", "~> 7.0"
+gem "rails-i18n", "~> 8.0", ">= 8.0.1"
 gem "resque", "~> 2.6"
 gem "truncate_html", "~> 0.9.3"
 gem "whenever", "~> 1.0", require: false
