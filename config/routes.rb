@@ -1,14 +1,51 @@
-Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+require "resque/server"
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+Rails.application.routes.draw do
+  mount Resque::Server.new, at: "/resque"
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
+  devise_for :users, controllers: { registrations: "registrations" }
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  devise_scope :user do
+    post "/users/sign_out", to: "devise/sessions#destroy"
+  end
+
+  resources :contacts, only: [ :create, :show ]
+  resources :plans_selecteds
+  resources :plans
+
+  resources :favorite_lands, only: [ :index, :create, :destroy ]
+  resources :favorite_houses, only: [ :index, :create, :destroy ]
+  resources :profiles
+  resources :profile_lands, only: [ :index ]
+  resources :cities, only: [ :index ]
+  get "/cities/province", to: "cities#province"
+
+
+
+  resources :lands do
+    get "show_images"
+
+    collection do
+      get "search"
+    end
+  end
+
+  resources :houses do
+    get "show_images"
+
+    collection do
+      get "buy"
+      get "pending"
+      get "rent"
+      get "search"
+      get "search_advanced"
+    end
+
+    member do
+      post "pending_status"
+    end
+  end
+
+  root "home#index"
 end
