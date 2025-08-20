@@ -197,7 +197,8 @@ GEM
       net-smtp
     marcel (1.0.4)
     matrix (0.4.3)
-    mini_magick (4.13.2)
+    mini_magick (5.3.1)
+      logger
     mini_mime (1.1.5)
     minitest (5.25.5)
     mono_logger (1.1.2)
@@ -443,7 +444,7 @@ DEPENDENCIES
   kamal
   kaminari (~> 1.2, >= 1.2.2)
   kaminari-bootstrap (~> 3.0, >= 3.0.1)
-  mini_magick (~> 4.12)
+  mini_magick (~> 5.3)
   pg (~> 1.5)
   propshaft
   puma (>= 5.0)
