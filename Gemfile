@@ -41,7 +41,7 @@ gem "thruster", require: false
 gem "image_processing", "~> 1.2"
 
 gem "devise", "~> 4.9", ">= 4.9.2"
-gem "devise-i18n", "~> 1.11"
+gem "devise-i18n", "~> 1.15"
 gem "bootstrap", "~> 5.3.0.alpha3"
 gem "bootstrap_form", "~> 5.2", ">= 5.2.3"
 gem "jquery-rails"
