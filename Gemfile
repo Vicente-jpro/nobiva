@@ -55,7 +55,7 @@ gem "whenever", "~> 1.0", require: false
 
 gem "dartsass-rails", "~> 0.5.1"
 
-gem "pg", "~> 1.5"
+gem "pg", "~> 1.6"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
